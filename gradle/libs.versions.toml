@@ -16,6 +16,8 @@ playServices = "21.0.1"
 androidxWork = "2.9.0"
 koin = "3.5.3"
 serialization = "1.6.3"
+coil = "2.4.0"
+maps-compose = "2.11.4"
 
 # project versions
 projectApplicationId = "com.majedul.steptracker"
@@ -45,7 +47,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 timber = { group = "com.jakewharton.timber", name = "timber", version = "5.0.1" }
 org-mongodb-bson = { group = "org.mongodb", name = "bson", version = "5.2.1" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.7.3" }
-
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+google-maps-android-compose = { module = "com.google.maps.android:maps-compose", version.ref = "maps-compose" }
 
 
 google-android-gms-play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServices" }
