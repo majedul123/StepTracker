@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.majedul.steptracker"
-    compileSdk = 34
+    compileSdk = (libs.versions.projectCompileSdkVersion.get().toInt())
 
     defaultConfig {
         applicationId = "com.majedul.steptracker"
