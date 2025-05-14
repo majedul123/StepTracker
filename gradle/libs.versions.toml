@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.1"
+androidTools = "31.10.0"
 kotlin = "1.9.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -56,6 +57,13 @@ androidx-work = { group = "androidx.work", name = "work-runtime-ktx", version.re
 koin-android-workmanager = { group = "io.insert-koin", name = "koin-androidx-workmanager", version.ref = "koin" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
 
+# Gradle
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+
+android-tools-common = { module = "com.android.tools:common", version.ref = "androidTools" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradlePlugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version = "1.9.0-1.0.13" }
+room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version = "2.6.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
