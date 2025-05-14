@@ -1,13 +1,24 @@
 plugins {
-   `kotlin-dsl`
+    `kotlin-dsl`
 }
 
 group = "com.majedul.buildlogic"
 
 dependencies {
-  compileOnly(libs.android.gradlePlugin)
-   compileOnly(libs.android.tools.common)
-   compileOnly(libs.kotlin.gradlePlugin)
-   compileOnly(libs.ksp.gradlePlugin)
-   compileOnly(libs.room.gradlePlugin)
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.android.tools.common)
+    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
+}
+
+// register plugin
+gradlePlugin{
+    plugins{
+        register("androidApplication"){
+            id = "majedul.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+
+        }
+    }
 }
