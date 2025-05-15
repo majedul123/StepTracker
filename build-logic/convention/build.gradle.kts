@@ -25,5 +25,9 @@ gradlePlugin{
             implementationClass = "AndroidApplicationComposePlugin"
 
         }
+        register("androidLibrary"){
+            id = "majedul.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
