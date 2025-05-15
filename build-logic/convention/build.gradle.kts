@@ -20,5 +20,10 @@ gradlePlugin{
             implementationClass = "AndroidApplicationConventionPlugin"
 
         }
+        register("androidApplicationCompose"){
+            id = "majedul.android.application.compose"
+            implementationClass = "AndroidApplicationComposePlugin"
+
+        }
     }
 }

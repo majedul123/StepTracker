@@ -1,5 +1,7 @@
 plugins {
+    alias(libs.plugins.majedul.android.application.compose)
     alias(libs.plugins.majedul.android.application)
+
 }
 
 android {
@@ -7,22 +9,12 @@ android {
     compileSdk = (libs.versions.projectCompileSdkVersion.get().toInt())
 
     defaultConfig {
-
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
-
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"

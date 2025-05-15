@@ -22,6 +22,7 @@ maps-compose = "2.11.4"
 ksp = "2.0.20-1.0.24"
 room = "2.7.1"
 desugar_jdk_libs = "2.0.4"
+composeCompiler = "1.5.1"
 
 # project versions
 projectApplicationId = "com.majedul.steptracker"
@@ -30,6 +31,7 @@ projectMinSdkVersion = "25"
 projectTargetSdkVersion = "34"
 projectCompileSdkVersion = "35"
 projectVersionCode = "1"
+junitKtx = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -68,6 +70,7 @@ android-tools-common = { module = "com.android.tools:common", version.ref = "and
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradlePlugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -75,5 +78,6 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 majedul-android-application = { id = "majedul.android.application", version = 'unspecified' }
+majedul-android-application-compose = { id = "majedul.android.application.compose", version = 'unspecified' }
 
 [bundles]
