@@ -11,26 +11,19 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 internal fun Project.configureKotlinAndroid(
     commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
-
     commonExtension.apply {
         compileSdk = libs.findVersion("projectCompileSdkVersion").get().toString().toInt()
-
         defaultConfig.minSdk = libs.findVersion("projectMinSdkVersion").get().toString().toInt()
-
         compileOptions {
             isCoreLibraryDesugaringEnabled = true
             sourceCompatibility = JavaVersion.VERSION_1_8
             targetCompatibility = JavaVersion.VERSION_1_8
         }
-
         configureKotlin()
         dependencies {
             "coreLibraryDesugaring"(libs.findLibrary("desugar-jdk-libs").get())
         }
-
     }
-
-
 }
 
 private fun Project.configureKotlin() {
@@ -38,7 +31,5 @@ private fun Project.configureKotlin() {
         kotlinOptions {
             jvmTarget = JavaVersion.VERSION_1_8.toString()
         }
-
     }
-
 }
