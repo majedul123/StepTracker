@@ -33,5 +33,10 @@ gradlePlugin{
             id = "majedul.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+
+        register("androidFeatureUI"){
+            id = "majedul.android.feature.ui"
+            implementationClass = "AndroidFeatureUiConventionPlugin"
+        }
     }
 }
