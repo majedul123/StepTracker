@@ -80,5 +80,6 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 majedul-android-application = { id = "majedul.android.application", version = 'unspecified' }
 majedul-android-application-compose = { id = "majedul.android.application.compose", version = 'unspecified' }
 majedul-android-library = { id = "majedul.android.library", version = 'unspecified' }
+majedul-android-library-compose = { id = "majedul.android.library.compose", version = 'unspecified' }
 
 [bundles]
