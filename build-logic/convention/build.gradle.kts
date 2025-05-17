@@ -46,5 +46,9 @@ gradlePlugin{
             id = "majedul.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("jvmKtor"){
+            id = "majedul.jvm.ktor"
+            implementationClass = "JvmKtorConventionPlugin"
+        }
     }
 }

@@ -23,7 +23,9 @@ ksp = "2.0.20-1.0.24"
 room = "2.7.1"
 desugar_jdk_libs = "2.0.4"
 composeCompiler = "1.5.1"
-
+ktor = "3.0.0"
+ktorClientLogging = "3.0.0"
+ktorServerCallLogging = "2.3.7"
 # project versions
 projectApplicationId = "com.majedul.steptracker"
 projectVersionName = "1.0.0"
@@ -79,6 +81,15 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
+
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+
 # Gradle
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
@@ -104,6 +115,7 @@ majedul-android-library-compose = { id = "majedul.android.library.compose", vers
 majedul-android-feature-ui = { id = "majedul.android.feature.ui", version = 'unspecified' }
 majedul-android-room = { id = "majedul.android.room", version = 'unspecified' }
 majedul-jvm-library = { id = "majedul.jvm.library", version = 'unspecified' }
+majedul-jvm-ktor = {id = "majedul.jvm.ktor", version = 'unspecified'}
 
 [bundles]
 compose = [
@@ -121,3 +133,11 @@ compose-debug = [
 ]
 koin = ["koin-core", "koin-android", "koin-android-workmanager"]
 koin-compose = ["koin-core", "koin-android", "koin-android-workmanager", "koin-androidx-compose"]
+ktor =  [
+    "ktor-client-auth",
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-serialization-kotlinx-json"
+]

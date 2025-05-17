@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.majedul.android.application.compose)
     alias(libs.plugins.majedul.android.application)
+    alias(libs.plugins.majedul.jvm.ktor)
+
 
 }
 
