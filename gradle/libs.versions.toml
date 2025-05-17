@@ -75,16 +75,24 @@ koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
 # Gradle
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
 android-tools-common = { module = "com.android.tools:common", version.ref = "androidTools" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-ksp-gradlePlugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
-room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
+#ksp-gradlePlugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
+#room-gradlePlugin = { module = "androidx.room:room-gradle-plugin", version.ref = "room" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
 
 [plugins]
+room = { id = "androidx.room", version.ref = "room" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
@@ -94,6 +102,7 @@ majedul-android-application-compose = { id = "majedul.android.application.compos
 majedul-android-library = { id = "majedul.android.library", version = 'unspecified' }
 majedul-android-library-compose = { id = "majedul.android.library.compose", version = 'unspecified' }
 majedul-android-feature-ui = { id = "majedul.android.feature.ui", version = 'unspecified' }
+majedul-android-room = { id = "majedul.android.room", version = 'unspecified' }
 
 [bundles]
 compose = [

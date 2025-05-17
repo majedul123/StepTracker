@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.majedul.android.library)
+   // alias(libs.plugins.majedul.android.room)
 }
 
 android {

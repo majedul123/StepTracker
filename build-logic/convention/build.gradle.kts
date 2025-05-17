@@ -38,5 +38,9 @@ gradlePlugin{
             id = "majedul.android.feature.ui"
             implementationClass = "AndroidFeatureUiConventionPlugin"
         }
+        register("androidRoom"){
+            id = "majedul.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
     }
 }
