@@ -42,5 +42,9 @@ gradlePlugin{
             id = "majedul.android.room"
             implementationClass = "AndroidRoomConventionPlugin"
         }
+        register("jvmLibrary"){
+            id = "majedul.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
     }
 }

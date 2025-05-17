@@ -103,6 +103,7 @@ majedul-android-library = { id = "majedul.android.library", version = 'unspecifi
 majedul-android-library-compose = { id = "majedul.android.library.compose", version = 'unspecified' }
 majedul-android-feature-ui = { id = "majedul.android.feature.ui", version = 'unspecified' }
 majedul-android-room = { id = "majedul.android.room", version = 'unspecified' }
+majedul-jvm-library = { id = "majedul.jvm.library", version = 'unspecified' }
 
 [bundles]
 compose = [
