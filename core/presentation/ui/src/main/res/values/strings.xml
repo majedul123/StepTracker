@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_disk_full">Failed to save item because your dise is full</string>
+    <string name="error_request_timeout">The request timeout</string>
+    <string name="error_unauthorized">Unathorized. Wrong credentials</string>
+    <string name="error_no_internet">Could not connect server. Please check your internet</string>
+    <string name="error_server_error">Something went worng</string>
+    <string name="error_serialization">Serialization error</string>
+    <string name="error_unknown">Unknown error</string>
+</resources>
