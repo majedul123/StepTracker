@@ -10,7 +10,8 @@ sealed interface DataError : Error {
         PAYLOAD_TOO_LARGE,
         SERVER_ERROR,
         SERIALIZATION,
-        UNKNOWN
+        UNKNOWN,
+        TOO_MANY_REQUEST
     }
 
     enum class Local: DataError {
