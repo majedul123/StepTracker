@@ -4,9 +4,10 @@ plugins {
 
 android {
     namespace = "com.majedul.presentation"
-    compileSdk = 34
+
 }
 
 dependencies {
-     implementation(projects.core.domain)
+    implementation(projects.core.domain)
+    implementation(projects.auth.domain)
 }

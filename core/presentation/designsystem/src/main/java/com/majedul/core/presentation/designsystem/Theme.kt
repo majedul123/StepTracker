@@ -25,7 +25,7 @@ val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-fun majedTheme(
+fun MajedTheme(
     content: @Composable () -> Unit
 ) {
     var colorScheme = DarkColorScheme
