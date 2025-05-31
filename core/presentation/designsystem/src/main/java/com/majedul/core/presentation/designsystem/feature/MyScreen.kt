@@ -1,4 +1,4 @@
-package com.majedul.core.presentation.designsystem.gerbaje
+package com.majedul.core.presentation.designsystem.feature
 
 
 import androidx.compose.foundation.background

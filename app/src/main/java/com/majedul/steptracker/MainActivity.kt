@@ -10,8 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.majedul.core.presentation.designsystem.MajedTheme
-import com.majedul.core.presentation.designsystem.gerbaje.IntroScreen
-import com.majedul.core.presentation.designsystem.gerbaje.IntroScreenRoot
+import com.majedul.core.presentation.designsystem.feature.IntroScreenRoot
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
