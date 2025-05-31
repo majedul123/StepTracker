@@ -32,7 +32,6 @@ import com.majedul.core.presentation.designsystem.components.MajedOutlinedAction
 fun IntroScreenRoot(
     onSignUpClick: () -> Unit, onSignInClick: () -> Unit
 ) {
-
     IntroScreen(onAction = { action ->
         when (action) {
             is IntroAction.onSignInClick -> onSignInClick()
@@ -76,27 +75,20 @@ fun IntroScreen(
                 text = "Improve you fitness with StepTracker",
                 style = MaterialTheme.typography.bodySmall
             )
-
             Spacer(modifier = Modifier.height(32.dp))
-
             MajedOutlinedActionButton(text = stringResource(R.string.sign_in),
                 isLoading = false,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     onAction(IntroAction.onSignInClick)
                 })
-
-
             Spacer(modifier = Modifier.height(16.dp))
             MajedActionButton(text = stringResource(R.string.sign_up),
                 isLoading = false,
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     onAction(IntroAction.onSignUpnClick)
-                }
-
-            )
-
+                })
         }
     }
 }
@@ -123,16 +115,12 @@ private fun MajedLogoVertical(
 
         )
     }
-
 }
 
 @Preview
 @Composable
 private fun interScreenPreview() {
-
     MajedTheme {
         IntroScreen(onAction = {})
-
     }
-
 }
