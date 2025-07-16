@@ -26,6 +26,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.majedul.auth.domain.PasswordValidationState
 import com.majedul.auth.domain.UserDataValidator
 import com.majedul.core.presentation.designsystem.CheckIcon
 import com.majedul.core.presentation.designsystem.CrossIcon

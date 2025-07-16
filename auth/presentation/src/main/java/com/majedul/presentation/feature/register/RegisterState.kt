@@ -1,6 +1,7 @@
 package com.majedul.presentation.feature.register
 
 import androidx.compose.foundation.text.input.TextFieldState
+import com.majedul.auth.domain.PasswordValidationState
 
 
 data class RegisterState(

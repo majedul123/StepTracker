@@ -1,4 +1,4 @@
-package com.majedul.presentation.feature.register
+package com.majedul.auth.domain
 
 data class PasswordValidationState(
     val hasMinLength: Boolean = false,
