@@ -1,6 +1,5 @@
 package com.majedul.core.presentation.designsystem.components
 
-import android.widget.TextView
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.majedul.core.presentation.designsystem.MajedTheme
-import com.majedul.core.presentation.designsystem.majedBlack
-import com.majedul.core.presentation.designsystem.majedGray
+import com.majedul.core.presentation.designsystem.MajedBlack
+import com.majedul.core.presentation.designsystem.MajedGray
 
 @Composable
 fun MajedActionButton(
@@ -41,8 +40,8 @@ fun MajedActionButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
-            disabledContainerColor = majedGray,
-            disabledContentColor = majedBlack
+            disabledContainerColor = MajedGray,
+            disabledContentColor = MajedBlack
         ),
         shape = RoundedCornerShape(100f),
         modifier = Modifier.height(IntrinsicSize.Min) // assign fix height of button

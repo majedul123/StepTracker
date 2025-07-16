@@ -37,7 +37,7 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
         lineHeight = 20.sp,
-        color = majedGray
+        color = MajedGray
     ),
     bodyMedium = TextStyle(
         fontFamily = Poppins,
@@ -62,6 +62,6 @@ val Typography = Typography(
         fontFamily = Poppins,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
-        color = majedWhite
+        color = MajedWhite
     ),
 )

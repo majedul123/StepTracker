@@ -2,4 +2,6 @@
 <resources>
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
+    <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
 </resources>

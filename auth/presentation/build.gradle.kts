@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.majedul.android.feature.ui)
+    alias(libs.plugins.majedul.android.library.compose)
 }
 
 android {

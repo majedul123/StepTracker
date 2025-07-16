@@ -1,4 +1,4 @@
-package com.majedul.core.presentation.designsystem.feature
+package com.majedul.presentation.feature.intro
 
 sealed interface IntroAction {
 
