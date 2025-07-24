@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.majedul.core.presentation.designsystem.MajedTheme
-import com.majedul.presentation.feature.intro.IntroScreenRoot
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,15 +23,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
 
                 ) {
-                    IntroScreenRoot(
-                      onSignInClick = {
-                      },
-                        onSignUpClick = {
-
-                        }
-                  )
-
-                  //  MajedIntroScreen()
+                    val navController = rememberNavController()
+                    NavigationRoot(navController = navController)
                 }
             }
         }
