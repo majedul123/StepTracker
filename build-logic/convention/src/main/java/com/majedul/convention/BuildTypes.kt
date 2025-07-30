@@ -55,18 +55,17 @@ internal fun Project.configureBuildTypes(
 
 private fun BuildType.configureDebugBuildType(apiKey: String) {
     buildConfigField("String", "api_key", "\"$apiKey\"")
-    buildConfigField("String", "base_url", "\"https://localhost:8080\"")
+    buildConfigField("String", "base_url", "\"http://localhost:8086\"")
 }
 
 private fun BuildType.configureReleaseBuildType(
     apiKey: String, commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
     buildConfigField("String", "api_key", "\"$apiKey\"")
-    buildConfigField("String", "base_url", "\"https://localhost:8080\"")
+    buildConfigField("String", "base_url", "\"http://localhost:8086\"")
     isMinifyEnabled = true
     proguardFiles(
         commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
     )
-
 }

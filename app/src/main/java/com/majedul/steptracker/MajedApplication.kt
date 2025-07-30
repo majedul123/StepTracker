@@ -1,6 +1,7 @@
 package com.majedul.steptracker
 
 import android.app.Application
+import com.majedul.core.data.di.coreDataModule
 import com.majedul.di.authDataModule
 import com.majedul.presentation.di.authViewModelModule
 import com.majedul.steptracker.di.appModule
@@ -23,7 +24,8 @@ class MajedApplication : Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
-                appModule
+                appModule,
+                coreDataModule
             )
         }
     }

@@ -28,11 +28,11 @@ inline fun <T, E : Error, R> Result<T, E>.map(map: (T) -> R): Result<R, E> {
     }
 }
 
-fun <T, E : Error> Result<T, E>.asEmptyDataResult(): EmptyDataResult<E> {
-    return map { }
+fun <T, E: Error> Result<T, E>.asEmptyDataResult(): EmptyResult<E> {
+    return map {  }
 }
 
-typealias EmptyDataResult<E> = Result<Unit, Error>
+typealias EmptyResult<E> = Result<Unit, E>
 /*
 fun validatePassword(password: String): Result<Unit, PasswordValidationError> {
     //logic
