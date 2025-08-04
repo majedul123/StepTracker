@@ -1,0 +1,2 @@
+com.majedul.core.notification
+string active_run

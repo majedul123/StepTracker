@@ -1,9 +1,9 @@
 package com.majedul.steptracker
 
 import android.app.Application
+import com.majedul.auth.data.di.authDataModule
+import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
-import com.majedul.di.authDataModule
-import com.majedul.presentation.di.authViewModelModule
 import com.majedul.steptracker.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

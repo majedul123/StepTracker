@@ -21,9 +21,10 @@ class HttpClientFactory {
         return HttpClient(CIO) {
             install(ContentNegotiation) {
                 json(
-                    Json {
+                    json = Json {
                         ignoreUnknownKeys = true
-                    })
+                    }
+                )
             }
             install(Logging) {
                 logger = object : Logger {
@@ -33,10 +34,9 @@ class HttpClientFactory {
                 }
                 level = LogLevel.ALL
             }
-
             defaultRequest {
                 contentType(ContentType.Application.Json)
-                header("x-api-key", "BuildConfig.API_KEY")
+                header("x-api-key", BuildConfig.API_KEY)
             }
         }
     }

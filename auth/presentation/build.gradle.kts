@@ -1,11 +1,9 @@
 plugins {
     alias(libs.plugins.majedul.android.feature.ui)
-    alias(libs.plugins.majedul.android.library.compose)
 }
 
 android {
-    namespace = "com.majedul.presentation"
-
+    namespace = "com.majedul.auth.presentation"
 }
 
 dependencies {

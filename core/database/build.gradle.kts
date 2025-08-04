@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.majedul.android.library)
-   // alias(libs.plugins.majedul.android.room)
+    alias(libs.plugins.majedul.android.room)
 }
 
 android {
@@ -9,6 +9,6 @@ android {
 
 dependencies {
     implementation(libs.org.mongodb.bson)
+
     implementation(projects.core.domain)
-    implementation(libs.androidx.junit.ktx)
 }

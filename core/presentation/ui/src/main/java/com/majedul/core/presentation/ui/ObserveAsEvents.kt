@@ -1,3 +1,5 @@
+package com.majedul.core.presentation.ui
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -6,7 +8,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-
 
 @Composable
 fun <T> ObserveAsEvents(
@@ -19,9 +20,7 @@ fun <T> ObserveAsEvents(
     LaunchedEffect(flow, lifecycleOwner.lifecycle, key1, key2) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             withContext(Dispatchers.Main.immediate) {
-                flow.collect {
-                    onEvent(it)
-                }
+                flow.collect(onEvent)
             }
         }
     }

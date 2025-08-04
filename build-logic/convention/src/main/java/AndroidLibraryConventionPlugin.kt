@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.LibraryExtension
-import com.majedul.convention.ExtensionsType
+import com.majedul.convention.ExtensionType
 import com.majedul.convention.configureBuildTypes
 import com.majedul.convention.configureKotlinAndroid
 import org.gradle.api.Plugin
@@ -8,25 +8,29 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.kotlin
 
+class AndroidLibraryConventionPlugin: Plugin<Project> {
 
-class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         target.run {
             pluginManager.run {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
             }
-            extensions.configure<LibraryExtension>() {
+
+            extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
+
                 configureBuildTypes(
                     commonExtension = this,
-                    extensionsType = ExtensionsType.LIBRARY
+                    extensionType = ExtensionType.LIBRARY
                 )
+
                 defaultConfig {
                     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                     consumerProguardFiles("consumer-rules.pro")
                 }
             }
+
             dependencies {
                 "testImplementation"(kotlin("test"))
             }

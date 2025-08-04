@@ -1,5 +1,5 @@
 plugins {
-  alias(libs.plugins.majedul.jvm.library)
+    alias(libs.plugins.majedul.jvm.library)
 }
 
 dependencies {
