@@ -19,13 +19,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.majedul.core.presentation.designsystem.MajedTheme
 import com.majedul.core.presentation.designsystem.MajedBlack
 import com.majedul.core.presentation.designsystem.MajedGray
+import com.majedul.core.presentation.designsystem.MajedTheme
 
 @Composable
-fun majedulActionButton(
+fun MajedActionButton(
     text: String,
     isLoading: Boolean,
     modifier: Modifier = Modifier,
@@ -70,7 +71,7 @@ fun majedulActionButton(
 }
 
 @Composable
-fun majedulOutlinedActionButton(
+fun MajedOutlinedActionButton(
     text: String,
     isLoading: Boolean,
     modifier: Modifier = Modifier,
@@ -112,4 +113,20 @@ fun majedulOutlinedActionButton(
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun MajedActionButtonPreview() {
+    MajedTheme {
+        MajedActionButton(
+            text= "ansnc",
+            isLoading = false,
+            modifier= Modifier.fillMaxWidth(),
+            enabled = true,
+            onClick= {
+            }
+        )
+    }
+
 }

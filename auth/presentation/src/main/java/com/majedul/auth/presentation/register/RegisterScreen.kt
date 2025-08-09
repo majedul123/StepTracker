@@ -45,9 +45,9 @@ import com.majedul.core.presentation.designsystem.Poppins
 
 import com.majedul.core.presentation.designsystem.MajedTheme
 import com.majedul.core.presentation.designsystem.components.GradientBackground
-import com.majedul.core.presentation.designsystem.components.majedulActionButton
-import com.majedul.core.presentation.designsystem.components.majedulPasswordTextField
-import com.majedul.core.presentation.designsystem.components.majedulTextField
+import com.majedul.core.presentation.designsystem.components.MajedActionButton
+import com.majedul.core.presentation.designsystem.components.MajedPasswordTextField
+import com.majedul.core.presentation.designsystem.components.MajedTextField
 import com.majedul.core.presentation.ui.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
@@ -140,7 +140,7 @@ private fun RegisterScreen(
                 }
             )
             Spacer(modifier = Modifier.height(48.dp))
-            majedulTextField(
+            MajedTextField(
                 state = state.email,
                 startIcon = EmailIcon,
                 endIcon = if (state.isEmailValid) {
@@ -153,7 +153,7 @@ private fun RegisterScreen(
                 keyboardType = KeyboardType.Email
             )
             Spacer(modifier = Modifier.height(16.dp))
-            majedulPasswordTextField(
+            MajedPasswordTextField(
                 state = state.password,
                 isPasswordVisible = state.isPasswordVisible,
                 onTogglePasswordVisibility = {
@@ -194,7 +194,7 @@ private fun RegisterScreen(
                 isValid = state.passwordValidationState.hasUpperCaseCharacter
             )
             Spacer(modifier = Modifier.height(32.dp))
-            majedulActionButton(
+            MajedActionButton(
                 text = stringResource(id = R.string.register),
                 isLoading = state.isRegistering,
                 enabled = state.canRegister,

@@ -46,7 +46,7 @@ import com.majedul.core.presentation.designsystem.R
 import com.majedul.core.presentation.designsystem.MajedTheme
 
 @Composable
-fun majedulPasswordTextField(
+fun MajedPasswordTextField(
     state: TextFieldState,
     isPasswordVisible: Boolean,
     onTogglePasswordVisibility: () -> Unit,
@@ -157,7 +157,7 @@ fun majedulPasswordTextField(
 @Composable
 private fun majedulTextFieldPreview() {
     MajedTheme {
-        majedulPasswordTextField(
+        MajedPasswordTextField(
             state = rememberTextFieldState(),
             hint = "example@test.com",
             title = "Email",

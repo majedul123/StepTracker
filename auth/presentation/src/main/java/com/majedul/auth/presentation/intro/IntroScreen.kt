@@ -21,8 +21,8 @@ import com.majedul.auth.presentation.R
 import com.majedul.core.presentation.designsystem.LogoIcon
 import com.majedul.core.presentation.designsystem.MajedTheme
 import com.majedul.core.presentation.designsystem.components.GradientBackground
-import com.majedul.core.presentation.designsystem.components.majedulActionButton
-import com.majedul.core.presentation.designsystem.components.majedulOutlinedActionButton
+import com.majedul.core.presentation.designsystem.components.MajedActionButton
+import com.majedul.core.presentation.designsystem.components.MajedOutlinedActionButton
 
 @Composable
 fun IntroScreenRoot(
@@ -69,7 +69,7 @@ fun IntroScreen(
                 style = MaterialTheme.typography.bodySmall
             )
             Spacer(modifier = Modifier.height(32.dp))
-            majedulOutlinedActionButton(
+            MajedOutlinedActionButton(
                 text = stringResource(id = R.string.sign_in),
                 isLoading = false,
                 onClick = {
@@ -79,7 +79,7 @@ fun IntroScreen(
                     .fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(16.dp))
-            majedulActionButton(
+            MajedActionButton(
                 text = stringResource(id = R.string.sign_up),
                 isLoading = false,
                 modifier = Modifier.fillMaxWidth(),

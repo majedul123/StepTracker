@@ -45,7 +45,7 @@ import com.majedul.core.presentation.designsystem.EmailIcon
 import com.majedul.core.presentation.designsystem.MajedTheme
 
 @Composable
-fun majedulTextField(
+fun MajedTextField(
     state: TextFieldState,
     startIcon: ImageVector?,
     endIcon: ImageVector?,
@@ -170,9 +170,9 @@ fun majedulTextField(
 
 @Preview
 @Composable
-private fun majedulTextFieldPreview() {
+private fun MajedulTextFieldPreview() {
     MajedTheme {
-        majedulTextField(
+        MajedTextField(
             state = rememberTextFieldState(),
             startIcon = EmailIcon,
             endIcon = CheckIcon,
