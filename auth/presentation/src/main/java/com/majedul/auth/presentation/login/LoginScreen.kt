@@ -76,8 +76,7 @@ fun LoginScreenRoot(
                 }
                 else -> Unit
             }
-
-            viewModel::onAction
+            viewModel.onAction(action)
         }
 
     )
@@ -145,7 +144,7 @@ fun LoginScreen(
                 text = stringResource(R.string.login),
                 isLoading = state.isLogging,
                 modifier = Modifier.fillMaxWidth(),
-                enabled = state.canLogin,
+                enabled = !state.canLogin,
                 onClick = {
                     onAction.invoke(LoginAction.OnLoginClick)
                 })

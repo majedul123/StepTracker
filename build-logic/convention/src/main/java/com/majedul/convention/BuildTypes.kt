@@ -49,7 +49,7 @@ internal fun Project.configureBuildTypes(
 
 private fun BuildType.configureDebugBuildType(apiKey: String) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")
-    buildConfigField("String", "BASE_URL", "\"http://192.168.0.116:8086\"")
+    buildConfigField("String", "BASE_URL", "\"http://172.28.1.121:8086/auth\"")
 }
 
 private fun BuildType.configureReleaseBuildType(

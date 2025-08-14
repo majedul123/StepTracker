@@ -23,4 +23,5 @@
     <string name="running_companion_text">Welcome to your ultimate running companion. Track , analyze you run</string>
     <string name="do_not_have_an_account">Do not have an account</string>
     <string name="login_success">Login success</string>
+    <string name="error_invalid_credentials">Invalid cerdentials</string>
 </resources>
