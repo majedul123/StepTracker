@@ -23,6 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -121,6 +122,7 @@ fun LoginScreen(
                 endIcon = null,
                 hint = stringResource(R.string.example_email),
                 title = stringResource(R.string.email),
+                keyboardType = KeyboardType.Email,
                 modifier = Modifier.fillMaxWidth(),
                 error = null,
             )
@@ -144,7 +146,7 @@ fun LoginScreen(
                 text = stringResource(R.string.login),
                 isLoading = state.isLogging,
                 modifier = Modifier.fillMaxWidth(),
-                enabled = !state.canLogin,
+                enabled = state.canLogin,
                 onClick = {
                     onAction.invoke(LoginAction.OnLoginClick)
                 })

@@ -17,6 +17,7 @@ import com.majedul.core.presentation.ui.UiText
 import com.majedul.core.presentation.ui.asUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -32,67 +33,51 @@ class LoginViewModel(
     private val eventChannel = Channel<LoginEvent>()
     val events = eventChannel.receiveAsFlow()
 
-
     init {
-
         combine(state.email.textAsFlow(), state.password.textAsFlow()) { email, password ->
-
-
             state = state.copy(
-                canLogin = userDataValidator.isValidEmail(email.toString()) &&
-                        password.isNotEmpty()
+                canLogin = userDataValidator.isValidEmail(
+                    email = email.toString().trim()
+                ) && password.isNotEmpty()
             )
-
-        }
-
+        }.launchIn(viewModelScope)
     }
+
     fun onAction(action: LoginAction) {
-
-        when (action) {
-            is LoginAction.OnLoginClick -> login()
-
-            LoginAction.OnRegisterClick -> {
-
-            }
-
+        when(action) {
+            LoginAction.OnLoginClick -> login()
             LoginAction.OnTogglePasswordVisibilityClick -> {
-                state = state.copy(isPasswordVisible = !state.isPasswordVisible)
+                state = state.copy(
+                    isPasswordVisible = !state.isPasswordVisible
+                )
             }
+            else -> Unit
         }
-
     }
 
-
-    private fun login(){
-
+    private fun login() {
         viewModelScope.launch {
-            state= state.copy(isLogging =  true)
+            state = state.copy(isLogging = true)
             val result = authRepository.login(
                 email = state.email.text.toString().trim(),
                 password = state.password.text.toString()
             )
             state = state.copy(isLogging = false)
 
-            when(result){
+            when(result) {
                 is Result.Error -> {
-                    if(result.error == DataError.Network.UNAUTHORIZED){
-                        eventChannel.send(
-                            LoginEvent.Error(
-                                UiText.StringResource(R.string.error_invalid_credentials)
-                            )
-                        )
-                    }else{
-                        eventChannel.send(
-                            LoginEvent.Error(
-                                result.error.asUiText()
-                            )
-                        )
+                    if(result.error == DataError.Network.UNAUTHORIZED) {
+                        eventChannel.send(LoginEvent.Error(
+                            UiText.StringResource(R.string.error_invalid_credentials)
+                        ))
+                    } else {
+                        eventChannel.send(LoginEvent.Error(result.error.asUiText()))
                     }
                 }
-                is Result.Success -> LoginEvent.LoginSuccess
+                is Result.Success -> {
+                    eventChannel.send(LoginEvent.LoginSuccess)
+                }
             }
         }
-
     }
-
 }
