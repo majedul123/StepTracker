@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.majedul.auth.domain.AuthRepository
 import com.majedul.auth.domain.UserDataValidator
 import com.majedul.auth.presentation.R
-import com.majedul.auth.presentation.register.RegisterEvent
 import com.majedul.core.domain.util.DataError
 import com.majedul.core.domain.util.Result
 import com.majedul.core.presentation.ui.UiText
