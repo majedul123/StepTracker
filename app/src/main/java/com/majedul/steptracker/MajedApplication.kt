@@ -4,6 +4,7 @@ import android.app.Application
 import com.majedul.auth.data.di.authDataModule
 import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
+import com.majedul.run.presentation.active_run.di.runViewModelModule
 import com.majedul.steptracker.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,7 +26,8 @@ class MajedApplication : Application() {
                 authDataModule,
                 authViewModelModule,
                 appModule,
-                coreDataModule
+                coreDataModule,
+                runViewModelModule
             )
         }
     }

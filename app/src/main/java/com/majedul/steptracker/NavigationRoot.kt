@@ -10,6 +10,8 @@ import androidx.navigation.navigation
 import com.majedul.auth.presentation.intro.IntroScreenRoot
 import com.majedul.auth.presentation.login.LoginScreenRoot
 import com.majedul.auth.presentation.register.RegisterScreenRoot
+import com.majedul.run.presentation.active_run.ActiveRunScreenRoot
+import com.majedul.run.presentation.run_overview.RunoverViewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -84,7 +86,15 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController){
 
     navigation(startDestination = "run_overview", route = "run") {
         composable(route = "run_overview") {
-            Text("Hello run overview")
+            RunoverViewScreenRoot(
+                onStartClick = {
+                    navController.navigate("active_run")
+                }
+            )
+        }
+
+        composable(route = "active_run") {
+            ActiveRunScreenRoot()
         }
     }
 

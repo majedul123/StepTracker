@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="majed">Majedul</string>
+    <string name="analytics">Analytics</string>
+    <string name="logout">Logout</string>
 
 </resources>

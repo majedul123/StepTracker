@@ -48,7 +48,7 @@ fun MajedToolbar(
     showToolbar: Boolean = true,
     showBackButton: Boolean = false,
     title: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     menuItems: List<DropdownItem> = emptyList(),
     onMenuItemCLick: (Int) -> Unit = {},
     onBackCLick: () -> Unit = {},
