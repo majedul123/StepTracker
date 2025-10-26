@@ -9,42 +9,36 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureBuildTypes(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
-    extensionsType: ExtensionsType
+    commonExtension: CommonExtension<*, *, *, *, *>,
+    extensionType: ExtensionType
 ) {
-    val apiKey = gradleLocalProperties(rootDir, providers).getProperty("API_KEY")
-    when (extensionsType) {
-        ExtensionsType.APPLICATION -> {
-            commonExtension.run {
+    commonExtension.run {
+        buildFeatures {
+            buildConfig = true
+        }
 
-                buildFeatures{
-                    buildConfig = true
-                }
+        val apiKey = gradleLocalProperties(rootDir).getProperty("API_KEY")
+        when(extensionType) {
+            ExtensionType.APPLICATION -> {
                 extensions.configure<ApplicationExtension> {
                     buildTypes {
                         debug {
                             configureDebugBuildType(apiKey)
                         }
                         release {
-                          configureReleaseBuildType(apiKey,commonExtension)
+                            configureReleaseBuildType(commonExtension, apiKey)
                         }
                     }
                 }
             }
-        }
-
-        ExtensionsType.LIBRARY -> {
-            commonExtension.run {
-                buildFeatures{
-                    buildConfig = true
-                }
+            ExtensionType.LIBRARY -> {
                 extensions.configure<LibraryExtension> {
                     buildTypes {
                         debug {
                             configureDebugBuildType(apiKey)
                         }
                         release {
-                            configureReleaseBuildType(apiKey,commonExtension)
+                            configureReleaseBuildType(commonExtension, apiKey)
                         }
                     }
                 }
@@ -54,16 +48,18 @@ internal fun Project.configureBuildTypes(
 }
 
 private fun BuildType.configureDebugBuildType(apiKey: String) {
-    buildConfigField("String", "api_key", "\"$apiKey\"")
-    buildConfigField("String", "base_url", "\"http://localhost:8086\"")
+    buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    buildConfigField("String", "BASE_URL", "\"http://172.28.0.221:8086/auth\"")
 }
 
 private fun BuildType.configureReleaseBuildType(
-    apiKey: String, commonExtension: CommonExtension<*, *, *, *, *, *>
+    commonExtension: CommonExtension<*, *, *, *, *>,
+    apiKey: String
 ) {
-    buildConfigField("String", "api_key", "\"$apiKey\"")
-    buildConfigField("String", "base_url", "\"http://localhost:8086\"")
-    isMinifyEnabled = true
+    buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")
+
+    isMinifyEnabled = false
     proguardFiles(
         commonExtension.getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"

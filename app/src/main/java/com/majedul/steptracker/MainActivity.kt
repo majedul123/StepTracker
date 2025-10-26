@@ -6,43 +6,38 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.majedul.core.presentation.designsystem.MajedTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel by viewModel<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //  enableEdgeToEdge()
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                viewModel.state.isCheckingAuth
+            }
+        }
         setContent {
             MajedTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.Companion.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
-
                 ) {
-                    val navController = rememberNavController()
-                    NavigationRoot(navController = navController)
+                    if (!viewModel.state.isCheckingAuth) {
+                        val navController = rememberNavController()
+                        NavigationRoot(
+                            navController = navController,
+                            isLoggedIn = viewModel.state.isLoggedIn
+                        )
+                    }
                 }
             }
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun myPrewiew() {
-    MajedTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-
-        ) {
-          //  Icon(imageVector = AnalyticsIcon, contentDescription = null)
-          //  IntroScreen()
-
         }
     }
 }

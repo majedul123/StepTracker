@@ -1,5 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.majedul.convention.ExtensionsType
+import com.majedul.convention.ExtensionType
 import com.majedul.convention.configureBuildTypes
 import com.majedul.convention.configureKotlinAndroid
 import com.majedul.convention.libs
@@ -11,23 +11,26 @@ import org.gradle.kotlin.dsl.configure
 class AndroidApplicationConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-
         target.run {
             pluginManager.run {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
             }
-
             extensions.configure<ApplicationExtension> {
                 defaultConfig {
                     applicationId = libs.findVersion("projectApplicationId").get().toString()
                     targetSdk = libs.findVersion("projectTargetSdkVersion").get().toString().toInt()
-                    minSdk = libs.findVersion("projectMinSdkVersion").get().toString().toInt()
+
                     versionCode = libs.findVersion("projectVersionCode").get().toString().toInt()
                     versionName = libs.findVersion("projectVersionName").get().toString()
                 }
+
                 configureKotlinAndroid(this)
-                configureBuildTypes(commonExtension = this, extensionsType = ExtensionsType.APPLICATION)
+
+                configureBuildTypes(
+                    commonExtension = this,
+                    extensionType = ExtensionType.APPLICATION
+                )
             }
         }
     }

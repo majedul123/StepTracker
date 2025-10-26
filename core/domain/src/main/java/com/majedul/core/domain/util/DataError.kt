@@ -1,21 +1,19 @@
 package com.majedul.core.domain.util
 
-sealed interface DataError : Error {
-
-    enum class Network : DataError {
+sealed interface DataError: Error {
+    enum class Network: DataError {
         REQUEST_TIMEOUT,
         UNAUTHORIZED,
         CONFLICT,
+        TOO_MANY_REQUESTS,
         NO_INTERNET,
         PAYLOAD_TOO_LARGE,
         SERVER_ERROR,
         SERIALIZATION,
-        UNKNOWN,
-        TOO_MANY_REQUEST
+        UNKNOWN
     }
 
     enum class Local: DataError {
-        DISK_FULL,
-
+        DISK_FULL
     }
 }

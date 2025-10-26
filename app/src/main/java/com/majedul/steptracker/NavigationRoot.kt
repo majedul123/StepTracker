@@ -7,50 +7,95 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.majedul.presentation.feature.intro.IntroScreenRoot
-import com.majedul.presentation.feature.register.RegisterScreenRoot
+import com.majedul.auth.presentation.intro.IntroScreenRoot
+import com.majedul.auth.presentation.login.LoginScreenRoot
+import com.majedul.auth.presentation.register.RegisterScreenRoot
+import com.majedul.run.presentation.active_run.ActiveRunScreenRoot
+import com.majedul.run.presentation.run_overview.RunoverViewScreenRoot
 
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean,
 ) {
     NavHost(
-        navController = navController, startDestination = "auth"
+        navController = navController,
+        startDestination = if (isLoggedIn) "run" else "auth"
     ) {
-       authGraph(navController)
+        authGraph(navController)
+        runGraph(navController)
     }
 }
 
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation(
-        startDestination = "intro", route = "auth"
+        startDestination = "intro",
+        route = "auth"
     ) {
-
-        composable("intro") {
-            IntroScreenRoot(onSignUpClick = {
-                navController.navigate("register")
-            }, onSignInClick = {
-                navController.navigate("login")
-            })
-
-        }
-
-        composable("register") {
-            RegisterScreenRoot(onSignInClick = {
-                navController.navigate("login"){
-                    popUpTo("register"){
-                        inclusive = true
-                        saveState = true
-                    }
-                    restoreState = true
+        composable(route = "intro") {
+            IntroScreenRoot(
+                onSignUpClick = {
+                    navController.navigate("register")
+                },
+                onSignInClick = {
+                    navController.navigate("login")
                 }
-            }, onSuccessfulRegistration = {
-                navController.navigate("login")
-            })
-
+            )
+        }
+        composable(route = "register") {
+            RegisterScreenRoot(
+                onSignInClick = {
+                    navController.navigate("login") {
+                        popUpTo("register") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                },
+                onSuccessfulRegistration = {
+                    navController.navigate("login")
+                }
+            )
         }
         composable("login") {
-            Text(text = "Login")
+            LoginScreenRoot(
+                onLoginSuccess = {
+
+                    navController.navigate("run"){
+                        popUpTo("auth"){
+                            inclusive = true
+                        }
+                    }
+                },
+                onSignUpCLik = {
+                    navController.navigate("register") {
+                        popUpTo("login") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
+         }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(navController: NavHostController){
+
+    navigation(startDestination = "run_overview", route = "run") {
+        composable(route = "run_overview") {
+            RunoverViewScreenRoot(
+                onStartClick = {
+                    navController.navigate("active_run")
+                }
+            )
+        }
+
+        composable(route = "active_run") {
+            ActiveRunScreenRoot()
         }
     }
+
 }

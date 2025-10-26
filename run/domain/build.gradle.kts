@@ -1,7 +1,8 @@
 plugins {
-  alias(libs.plugins.majedul.jvm.library)
+    alias(libs.plugins.majedul.jvm.library)
 }
 
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
+    implementation(projects.core.domain)
 }
