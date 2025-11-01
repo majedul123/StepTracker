@@ -4,11 +4,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.majedul.run.domain.RunTracker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import timber.log.Timber
 
-class ActiveRunViewModel : ViewModel() {
+class ActiveRunViewModel(
+    private val runTracker: RunTracker
+) : ViewModel() {
 
     var state by mutableStateOf(ActiveRunState())
         private set
@@ -16,6 +23,24 @@ class ActiveRunViewModel : ViewModel() {
     val events = channel.receiveAsFlow()
 
     private val hasLocationPermission = MutableStateFlow(false)
+
+    init {
+        hasLocationPermission.onEach { hasPermission ->
+            if (hasPermission) {
+                runTracker.startObservingLocation()
+            } else {
+                runTracker.stopObservingLocation()
+            }
+        }
+            .launchIn(viewModelScope)
+
+        runTracker.currentLocation
+            .onEach { location ->
+                Timber.d("new location $location")
+
+            }
+            .launchIn(viewModelScope)
+    }
 
     fun action(action: ActiveRunAction) {
 

@@ -4,14 +4,20 @@ import android.app.Application
 import com.majedul.auth.data.di.authDataModule
 import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
+import com.majedul.run.location.di.locationModule
+import com.majedul.run.presentation.active_run.di.runPresentationModule
 import com.majedul.run.presentation.active_run.di.runViewModelModule
 import com.majedul.steptracker.di.appModule
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
 class MajedApplication : Application() {
+
+    val applicationScope = CoroutineScope(SupervisorJob())
 
     override fun onCreate() {
         super.onCreate()
@@ -27,7 +33,9 @@ class MajedApplication : Application() {
                 authViewModelModule,
                 appModule,
                 coreDataModule,
-                runViewModelModule
+                runViewModelModule,
+                locationModule,
+                runPresentationModule
             )
         }
     }
