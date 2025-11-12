@@ -31,7 +31,7 @@ class RunTracker(
     private val isTracking = MutableStateFlow(false)
 
     private val _elapsedTime = MutableStateFlow(Duration.ZERO)
-    private val elapsedTime = _elapsedTime.asStateFlow()
+    val elapsedTime = _elapsedTime.asStateFlow()
 
     private val isObservingLocation = MutableStateFlow(false)
 
