@@ -48,8 +48,10 @@ class AndroidLocationObserver(
                     close()
                     return@callbackFlow
                 } else {
-                    client.lastLocation.addOnSuccessListener { location ->
-                        trySend(location.toLocationWithAttitude())
+                    client.lastLocation.addOnSuccessListener {
+                        it?.let { location ->
+                            trySend(location.toLocationWithAttitude())
+                        }
                     }
 
                     val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval)

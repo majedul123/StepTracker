@@ -31,6 +31,7 @@ import com.majedul.core.presentation.designsystem.components.MajedOutlinedAction
 import com.majedul.core.presentation.designsystem.components.MajedScaffold
 import com.majedul.core.presentation.designsystem.components.MajedToolbar
 import com.majedul.run.presentation.active_run.components.RunDatCard
+import com.majedul.run.presentation.active_run.maps.TrackerMap
 import com.majedul.run.presentation.util.hasLocationPermission
 import com.majedul.run.presentation.util.hasNotificationPermission
 import com.majedul.run.presentation.util.shouldShowLocationPermissionRationale
@@ -154,7 +155,13 @@ fun ActiveRunScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
-
+           TrackerMap(
+               isRunFinished = state.isRunFinished,
+               currentLocation = state.currentLocation,
+               locations = state.runData.locations,
+               onSnapShot ={},
+               modifier = Modifier.fillMaxSize()
+           )
             RunDatCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,
