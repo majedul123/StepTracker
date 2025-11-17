@@ -88,9 +88,10 @@ fun TrackerMap(
         properties = MapProperties(
             mapStyleOptions = mapStyle
         ), uiSettings = MapUiSettings(
-            zoomControlsEnabled = false
+            zoomControlsEnabled = true
         )
     ) {
+        MajedPolyLines(locations = locations)
 
         if (!isRunFinished && currentLocation != null) {
             MarkerComposable(
@@ -111,10 +112,7 @@ fun TrackerMap(
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
                         tint = MaterialTheme.colorScheme.onPrimary
-
-
                     )
-
                 }
             }
         }
