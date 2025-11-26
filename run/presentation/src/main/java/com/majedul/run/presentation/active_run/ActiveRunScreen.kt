@@ -25,6 +25,7 @@ import com.majedul.core.presentation.designsystem.MajedTheme
 import com.majedul.core.presentation.designsystem.R
 import com.majedul.core.presentation.designsystem.StartIcon
 import com.majedul.core.presentation.designsystem.StopIcon
+import com.majedul.core.presentation.designsystem.components.MajedActionButton
 import com.majedul.core.presentation.designsystem.components.MajedDialog
 import com.majedul.core.presentation.designsystem.components.MajedFloatingActionButton
 import com.majedul.core.presentation.designsystem.components.MajedOutlinedActionButton
@@ -173,6 +174,68 @@ fun ActiveRunScreen(
             )
         }
 
+
+      /*  if (!state.shouldTrack && state.hasStartRunning) {
+
+            MajedDialog(
+                title = stringResource(R.string.running_is_paused),
+                onDismiss = {
+                    onAction(ActiveRunAction.OnResumeRunCLick)
+                },
+                description = stringResource(R.string.resume_or_finish_run),
+                primaryButton = {
+                    MajedActionButton(
+                        text = stringResource(R.string.resume),
+                        isLoading = false,
+                        onClick = {
+                            onAction(ActiveRunAction.OnResumeRunCLick)
+                        },
+                        modifier = Modifier.weight(1f)
+
+                    )
+                },
+                secondaryButton = {
+                    MajedOutlinedActionButton(
+                        text = stringResource(id = R.string.finish),
+                        isLoading = state.isSavingRun,
+                        onClick = {
+                            onAction(ActiveRunAction.OnFinishRunCLick)
+                        },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            )
+        }*/
+
+        if (!state.shouldTrack && state.hasStartRunning) {
+            MajedDialog(
+                title = stringResource(id = R.string.running_is_paused),
+                onDismiss = {
+                    onAction(ActiveRunAction.OnResumeRunCLick)
+                },
+                description = stringResource(id = R.string.resume_or_finish_run),
+                primaryButton = {
+                    MajedActionButton(
+                        text = stringResource(id = R.string.resume),
+                        isLoading = false,
+                        onClick = {
+                            onAction(ActiveRunAction.OnResumeRunCLick)
+                        },
+                        modifier = Modifier.weight(.5f)
+                    )
+                },
+                secondaryButton = {
+                   MajedOutlinedActionButton(
+                        text = stringResource(id = R.string.finish),
+                        isLoading = state.isSavingRun,
+                        onClick = {
+                            onAction(ActiveRunAction.OnFinishRunCLick)
+                        },
+                        modifier = Modifier.weight(.5f)
+                    )
+                }
+            )
+        }
 
         if (state.showLocationRationale || state.showNotificationRationale) {
 

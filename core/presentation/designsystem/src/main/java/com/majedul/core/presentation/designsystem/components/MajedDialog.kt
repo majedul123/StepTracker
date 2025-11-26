@@ -2,8 +2,10 @@ package com.majedul.core.presentation.designsystem.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,11 +27,10 @@ fun MajedDialog(
     title: String,
     onDismiss: () -> Unit,
     description: String,
-    primaryButton: @Composable () -> Unit,
+    primaryButton: @Composable RowScope.() -> Unit,
     modifier: Modifier = Modifier,
-    secondaryButton: @Composable () -> Unit = {}
+    secondaryButton: @Composable RowScope.() -> Unit = {}
 ) {
-
     Dialog(onDismissRequest = onDismiss) {
         Column(
             modifier = modifier
@@ -53,19 +54,20 @@ fun MajedDialog(
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                secondaryButton()
-                primaryButton()
+                Row(modifier = Modifier.weight(1f)) {
+                    primaryButton()
+                }
+                Row(modifier = Modifier.weight(1f)) {
+                    secondaryButton()
+                }
             }
-
         }
     }
-
 }
 
 

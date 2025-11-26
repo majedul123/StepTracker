@@ -85,6 +85,7 @@ class ActiveRunViewModel(
 
             ActiveRunAction.OnFinishRunCLick -> {
 
+
             }
 
             ActiveRunAction.OnResumeRunCLick -> {

@@ -15,4 +15,8 @@
     <string name="location_rationale">In order to track your location , need location permission. Please click ok for grant permission</string>
     <string name="notification_rationale">Plase click \"ok\" for grant notficaiton</string>
     <string name="okay">Okay</string>
+    <string name="running_is_paused">Running is paused</string>
+    <string name="resume_or_finish_run">Resume or Finish Run</string>
+    <string name="resume">Resume</string>
+    <string name="finish">Finish</string>
 </resources>
