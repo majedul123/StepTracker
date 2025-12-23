@@ -1,6 +1,6 @@
 package com.majedul.core.presentation.designsystem.components
 
-import androidx.compose.foundation.BorderStroke
+import  androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth

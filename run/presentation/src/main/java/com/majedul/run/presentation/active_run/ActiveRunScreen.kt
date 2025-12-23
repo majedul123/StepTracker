@@ -293,7 +293,7 @@ private fun ActivityResultLauncher<Array<String>>.requestMajedPermission(
 
 @Preview
 @Composable
-private fun activeRunScreenPreview() {
+private fun ActiveRunScreenPreview() {
 
     MajedTheme {
         ActiveRunScreen(

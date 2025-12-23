@@ -12,7 +12,7 @@
     <string name="pace">Pace</string>
     <string name="permission_required">Permission Required</string>
     <string name="location_notification_rationale">"In order to track your location and display notification, the app needs your permission. Please click okey "</string>
-    <string name="location_rationale">In order to track your location , need location permission. Please click ok for grant permission</string>
+    <string name="location_rationale">In order to track your location , need location permission. Please click OK for grant permission</string>
     <string name="notification_rationale">Plase click \"ok\" for grant notficaiton</string>
     <string name="okay">Okay</string>
     <string name="running_is_paused">Running is paused</string>
