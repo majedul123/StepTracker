@@ -33,6 +33,7 @@ import com.majedul.core.presentation.designsystem.components.MajedScaffold
 import com.majedul.core.presentation.designsystem.components.MajedToolbar
 import com.majedul.run.presentation.active_run.components.RunDatCard
 import com.majedul.run.presentation.active_run.maps.TrackerMap
+import com.majedul.run.presentation.active_run.service.ActiveRunService
 import com.majedul.run.presentation.util.hasLocationPermission
 import com.majedul.run.presentation.util.hasNotificationPermission
 import com.majedul.run.presentation.util.shouldShowLocationPermissionRationale
@@ -42,11 +43,14 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
 
     ActiveRunScreen(
-        state = viewModel.state, onAction = viewModel::action
+        state = viewModel.state,
+        onServiceToggle = onServiceToggle,
+        onAction = viewModel::onAction
     )
 
 
@@ -56,7 +60,9 @@ fun ActiveRunScreenRoot(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActiveRunScreen(
-    state: ActiveRunState, onAction: (ActiveRunAction) -> Unit
+    state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
+    onAction: (ActiveRunAction) -> Unit
 ) {
 
     val context = LocalContext.current
@@ -79,8 +85,8 @@ fun ActiveRunScreen(
 
         onAction(
             ActiveRunAction.SubmitLocationPermissionInfo(
-                acceptLocationPermission = hasCourseLocationPermission || hasFineLocationPermission,
-                showLocationPermissionRationale = showLocationRationale
+                acceptedLocationPermission = hasCourseLocationPermission || hasFineLocationPermission,
+                showLocationRationale = showLocationRationale
             )
         )
         onAction(
@@ -100,8 +106,8 @@ fun ActiveRunScreen(
 
         onAction(
             ActiveRunAction.SubmitLocationPermissionInfo(
-                acceptLocationPermission =  context.hasLocationPermission(),
-                showLocationPermissionRationale = showLocationRationale
+                acceptedLocationPermission =  context.hasLocationPermission(),
+                showLocationRationale = showLocationRationale
             )
         )
         onAction(
@@ -118,6 +124,19 @@ fun ActiveRunScreen(
 
 
     }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if(state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if(context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
+        }
+    }
+
     MajedScaffold(
         withGradient = true,
         topAppBar = {
@@ -125,7 +144,7 @@ fun ActiveRunScreen(
                 showBackButton = true,
                 title = stringResource(R.string.active_run),
                 onBackCLick = {
-                    onAction(ActiveRunAction.OnBackCLick)
+                    onAction(ActiveRunAction.OnBackClick)
                 },
             )
         },
@@ -207,11 +226,11 @@ fun ActiveRunScreen(
             )
         }*/
 
-        if (!state.shouldTrack && state.hasStartRunning) {
+        if (!state.shouldTrack && state.hasStartedRunning) {
             MajedDialog(
                 title = stringResource(id = R.string.running_is_paused),
                 onDismiss = {
-                    onAction(ActiveRunAction.OnResumeRunCLick)
+                    onAction(ActiveRunAction.OnResumeRunClick)
                 },
                 description = stringResource(id = R.string.resume_or_finish_run),
                 primaryButton = {
@@ -219,7 +238,7 @@ fun ActiveRunScreen(
                         text = stringResource(id = R.string.resume),
                         isLoading = false,
                         onClick = {
-                            onAction(ActiveRunAction.OnResumeRunCLick)
+                            onAction(ActiveRunAction.OnResumeRunClick)
                         },
                         modifier = Modifier.weight(.5f)
                     )
@@ -229,7 +248,7 @@ fun ActiveRunScreen(
                         text = stringResource(id = R.string.finish),
                         isLoading = state.isSavingRun,
                         onClick = {
-                            onAction(ActiveRunAction.OnFinishRunCLick)
+                            onAction(ActiveRunAction.OnFinishRunClick)
                         },
                         modifier = Modifier.weight(.5f)
                     )
@@ -255,7 +274,7 @@ fun ActiveRunScreen(
                 primaryButton = {
                     MajedOutlinedActionButton(
                         text = stringResource(R.string.okay), isLoading = false, onClick = {
-                            onAction(ActiveRunAction.dismissRationalDialog)
+                            onAction(ActiveRunAction.DismissRationaleDialog)
                             permissionLauncher.requestMajedPermission(context)
                         })
                 },
@@ -297,7 +316,7 @@ private fun ActiveRunScreenPreview() {
 
     MajedTheme {
         ActiveRunScreen(
-            state = ActiveRunState(), onAction = {})
+            state = ActiveRunState(), onAction = {}, onServiceToggle = {})
     }
 
 }
