@@ -64,7 +64,7 @@ class ActiveRunService: Service() {
             createNotificationChannel()
 
             val activityIntent = Intent(applicationContext, activityClass).apply {
-                data = "runique://active_run".toUri()
+                data = "majedul://active_run".toUri()
                 addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             }
             val pendingIntent = TaskStackBuilder.create(applicationContext).run {
