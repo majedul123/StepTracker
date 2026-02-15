@@ -4,6 +4,7 @@ import android.app.Application
 import com.majedul.auth.data.di.authDataModule
 import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
+import com.majedul.core.database.di.databaseModule
 import com.majedul.run.location.di.locationModule
 import com.majedul.run.presentation.active_run.di.runPresentationModule
 import com.majedul.run.presentation.active_run.di.runViewModelModule
@@ -35,7 +36,8 @@ class MajedApplication : Application() {
                 coreDataModule,
                 runViewModelModule,
                 locationModule,
-                runPresentationModule
+                runPresentationModule,
+                databaseModule
             )
         }
     }
