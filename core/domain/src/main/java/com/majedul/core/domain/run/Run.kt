@@ -11,7 +11,7 @@ data class Run(
     val dateTimeUtc: ZonedDateTime,
     val distanceMeters: Int,
     val location: Location,
-    val maxSpeedKph: Double,
+    val maxSpeedKmh: Double,
     val totalElevationMeters: Int,
     val mapPictureUrl: String?
 ) {

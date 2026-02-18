@@ -164,7 +164,7 @@ private fun DataGrid(
         mutableIntStateOf(0)
     }
 
-    var maxWidthDp = with(LocalDensity.current) { maxWidth.toDp() }
+    val maxWidthDp = with(LocalDensity.current) { maxWidth.toDp() }
 
     FlowRow(
         modifier = modifier.fillMaxWidth(),
@@ -173,7 +173,7 @@ private fun DataGrid(
     ) {
 
         runDataUiList.forEach { runDataUi ->
-            gridCell(
+            GridCell(
                 runDataUi = runDataUi,
                 modifier = Modifier
                     .defaultMinSize(minWidth = maxWidthDp)
@@ -279,7 +279,7 @@ private fun MapImage(
 }
 
 @Composable
-private fun gridCell(
+private fun GridCell(
     runDataUi: RunDataUi, modifier: Modifier = Modifier
 ) {
 
@@ -311,7 +311,7 @@ private fun RunListItemPreview() {
                 dateTimeUtc = ZonedDateTime.now(),
                 distanceMeters = 234,
                 location = Location(23.0, 89.0),
-                maxSpeedKph = 23.3894474,
+                maxSpeedKmh = 23.3894474,
                 totalElevationMeters = 123,
                 mapPictureUrl = null,
             ).toRunUi(),
