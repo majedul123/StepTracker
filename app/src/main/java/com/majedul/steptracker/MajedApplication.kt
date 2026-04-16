@@ -15,6 +15,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
+import com.majedul.run.network.di.networkModule
 
 class MajedApplication : Application() {
 
@@ -37,7 +38,8 @@ class MajedApplication : Application() {
                 runViewModelModule,
                 locationModule,
                 runPresentationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }

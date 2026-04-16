@@ -49,7 +49,7 @@ import com.majedul.core.presentation.designsystem.CalendarIcon
 import com.majedul.core.presentation.designsystem.MajedTheme
 import com.majedul.core.presentation.designsystem.R
 import com.majedul.core.presentation.designsystem.RunOutlinedIcon
-import com.majedul.run.presentation.run_overview.mapper.toRunUi
+import com.majedul.run.presentation.run_overview.mapper.toRunUI
 import com.majedul.run.presentation.run_overview.model.RunDataUi
 import com.majedul.run.presentation.run_overview.model.RunUi
 import java.time.ZonedDateTime
@@ -60,7 +60,7 @@ import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RunListItem(
+fun  RunListItem(
     runUi: RunUi, onDeleteClick: () -> Unit, modifier: Modifier = Modifier
 ) {
 
@@ -314,7 +314,7 @@ private fun RunListItemPreview() {
                 maxSpeedKmh = 23.3894474,
                 totalElevationMeters = 123,
                 mapPictureUrl = null,
-            ).toRunUi(),
+            ).toRunUI(),
             onDeleteClick = {},
 
             )

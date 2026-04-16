@@ -10,7 +10,7 @@ import com.majedul.run.presentation.run_overview.model.RunUi
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-fun Run.toRunUi(): RunUi {
+fun Run.toRunUI(): RunUi {
     val dateTimeInLocalTime = dateTimeUtc.withZoneSameInstant(
         ZoneId.systemDefault()
     )
