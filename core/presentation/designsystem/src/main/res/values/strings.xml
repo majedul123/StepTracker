@@ -10,4 +10,20 @@
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
     <string name="pace">Pace</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="location_notification_rationale">"In order to track your location and display notification, the app needs your permission. Please click okey "</string>
+    <string name="location_rationale">In order to track your location , need location permission. Please click OK for grant permission</string>
+    <string name="notification_rationale">Plase click \"ok\" for grant notficaiton</string>
+    <string name="okay">Okay</string>
+    <string name="running_is_paused">Running is paused</string>
+    <string name="resume_or_finish_run">Resume or Finish Run</string>
+    <string name="resume">Resume</string>
+    <string name="finish">Finish</string>
+    <string name="run_map">Run Map</string>
+    <string name="error_could_not_load_image">Error could not load image</string>
+    <string name="total_running_time">Total running time</string>
+    <string name="avg_speed">Average Speed</string>
+    <string name="max_speed">Max Speed</string>
+    <string name="total_elevation">Total Elevation</string>
+    <string name="delete">Delete</string>
 </resources>

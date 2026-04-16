@@ -1,20 +1,44 @@
 package com.majedul.run.presentation.run_overview
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.majedul.core.domain.run.RunRepository
+import com.majedul.run.presentation.run_overview.mapper.toRunUI
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
-class RunOverViewViewModel: ViewModel() {
+class RunOverViewViewModel(private val runRepository: RunRepository) : ViewModel() {
+
+    var state by mutableStateOf(RunOverviewState())
+        private set
+
+    init {
+        runRepository.getRuns().map { runs ->
+            val runUi = runs.map { it.toRunUI() }
+            state = state.copy(runs = runUi)
+        }.launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            runRepository.fetchRuns()
+        }
+    }
 
 
-    fun onAction(action: RunOverviewAction){
-        when(action){
-            RunOverviewAction.OnAnalyticsClick -> {
+    fun onAction(action: RunOverviewAction) {
+        when (action) {
+            RunOverviewAction.OnAnalyticsClick -> Unit
 
-            }
-            RunOverviewAction.OnLogoutCLick -> {
+            RunOverviewAction.OnLogoutCLick -> Unit
 
-            }
-            RunOverviewAction.OnStartClick -> {
-
+            RunOverviewAction.OnStartClick -> Unit
+            is RunOverviewAction.DeleteRun -> {
+                viewModelScope.launch {
+                    runRepository.deleteRun(action.runUi.id)
+                }
             }
         }
 
