@@ -3,6 +3,7 @@ package com.majedul.core.database.di
 import androidx.room.Room
 import com.majedul.core.database.RoomLocalRunDataSource
 import com.majedul.core.database.RunDatabase
+import com.majedul.core.database.dao.RunPendingSyncDao
 import com.majedul.core.domain.run.LocalDataSource
 import org.koin.android.ext.koin.androidApplication
 import org.koin.core.module.dsl.singleOf
@@ -13,14 +14,16 @@ val databaseModule = module {
 
     single {
         Room.databaseBuilder(
-            androidApplication(),
-            RunDatabase::class.java,
-            "run.db"
+            androidApplication(), RunDatabase::class.java, "run.db"
         ).build()
     }
 
     single {
         get<RunDatabase>().runDao
+    }
+
+    single {
+        get<RunDatabase>().runPendingSyncDao
     }
 
     singleOf(::RoomLocalRunDataSource).bind<LocalDataSource>()
