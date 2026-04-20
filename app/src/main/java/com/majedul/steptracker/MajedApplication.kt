@@ -5,6 +5,7 @@ import com.majedul.auth.data.di.authDataModule
 import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
 import com.majedul.core.database.di.databaseModule
+import com.majedul.run.data.di.runDataModule
 import com.majedul.run.location.di.locationModule
 import com.majedul.run.presentation.active_run.di.runPresentationModule
 import com.majedul.run.presentation.active_run.di.runViewModelModule
@@ -16,6 +17,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 import com.majedul.run.network.di.networkModule
+import org.koin.androidx.workmanager.koin.workManagerFactory
 
 class MajedApplication : Application() {
 
@@ -30,6 +32,7 @@ class MajedApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MajedApplication)
+            workManagerFactory()
             modules(
                 authDataModule,
                 authViewModelModule,
@@ -39,7 +42,8 @@ class MajedApplication : Application() {
                 locationModule,
                 runPresentationModule,
                 databaseModule,
-                networkModule
+                networkModule,
+                runDataModule
             )
         }
     }
