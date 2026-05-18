@@ -6,17 +6,22 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.majedul.core.domain.run.RunRepository
+import com.majedul.core.domain.SyncRunSchedular
 import com.majedul.run.presentation.run_overview.mapper.toRunUI
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.minutes
 
-class RunOverViewViewModel(private val runRepository: RunRepository) : ViewModel() {
+class RunOverViewViewModel(private val runRepository: RunRepository, private val runSchedular: SyncRunSchedular) : ViewModel() {
 
     var state by mutableStateOf(RunOverviewState())
         private set
 
     init {
+        viewModelScope.launch {
+            runSchedular.scheduleSync(SyncRunSchedular.SyncType.FetchRuns(30.minutes))
+        }
         runRepository.getRuns().map { runs ->
             val runUi = runs.map { it.toRunUI() }
             state = state.copy(runs = runUi)

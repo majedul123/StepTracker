@@ -4,6 +4,7 @@ import com.majedul.core.database.RoomLocalRunDataSource
 import com.majedul.core.database.dao.RunPendingSyncDao
 import com.majedul.core.database.mappers.toRun
 import com.majedul.core.domain.SessionStorage
+import com.majedul.core.domain.SyncRunSchedular
 import com.majedul.core.domain.run.RemoteRunDataSource
 import com.majedul.core.domain.run.Run
 import com.majedul.core.domain.run.RunId
@@ -24,7 +25,8 @@ class OfflineFirstRunRepository(
     private val remoteRunDataSource: RemoteRunDataSource,
     private val applicationScope: CoroutineScope,
     private val runPendingSyncDao: RunPendingSyncDao,
-    private val sessionStorage: SessionStorage
+    private val sessionStorage: SessionStorage,
+    private val syncRunSchedular: SyncRunSchedular
 ) : RunRepository {
 
     override fun getRuns(): Flow<List<Run>> {
@@ -56,6 +58,15 @@ class OfflineFirstRunRepository(
         )
         return when (remoteResult) {
             is Result.Error -> {
+                applicationScope.launch {
+                    syncRunSchedular.scheduleSync(
+                        type = SyncRunSchedular.SyncType.CreateRun(
+                            run = runWithId,
+                            mapPictureBytes = mapPicture
+                        )
+                    )
+                }.join()
+
                 Result.Success(Unit)
             }
 
@@ -79,6 +90,15 @@ class OfflineFirstRunRepository(
             remoteRunDataSource.deleteRun(id)
         }.await()
 
+        if(remoteResult is Result.Error){
+            applicationScope.launch {
+                syncRunSchedular.scheduleSync(
+                    type = SyncRunSchedular.SyncType.DeleteRuns(
+                        id
+                    )
+                )
+            }.join()
+        }
     }
 
     override suspend fun syncPendingRuns() {
