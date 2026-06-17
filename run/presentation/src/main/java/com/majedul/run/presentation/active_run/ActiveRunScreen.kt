@@ -196,7 +196,7 @@ private fun ActiveRunScreen(
                 isRunFinished = state.isRunFinished,
                 currentLocation = state.currentLocation,
                 locations = state.runData.locations,
-                onSnapShot = { bmp ->
+                onSnapshot = { bmp ->
                     val stream = ByteArrayOutputStream()
                     stream.use {
                         bmp.compress(

@@ -18,6 +18,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlin.time.Duration.Companion.milliseconds
 
 class AndroidLocationObserver(
     private val context: Context
@@ -30,51 +31,49 @@ class AndroidLocationObserver(
             val locationManager = context.getSystemService<LocationManager>()!!
             var isGpsEnabled = false
             var isNetworkEnabled = false
-
-            while (!isGpsEnabled && !isNetworkEnabled) {
+            while(!isGpsEnabled && !isNetworkEnabled) {
                 isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                isNetworkEnabled =
-                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
-                if (!isGpsEnabled && !isNetworkEnabled) {
-                    delay(3000L)
+                if(!isGpsEnabled && !isNetworkEnabled) {
+                    delay(3000L.milliseconds)
+                }
+            }
+
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                close()
+            } else {
+                client.lastLocation.addOnSuccessListener {
+                    it?.let { location ->
+                        trySend(location.toLocationWithAttitude())
+                    }
                 }
 
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    close()
-                    return@callbackFlow
-                } else {
-                    client.lastLocation.addOnSuccessListener {
-                        it?.let { location ->
+                val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval)
+                    .build()
+
+                val locationCallback = object : LocationCallback() {
+                    override fun onLocationResult(result: LocationResult) {
+                        super.onLocationResult(result)
+                        result.locations.lastOrNull()?.let { location ->
                             trySend(location.toLocationWithAttitude())
                         }
                     }
+                }
 
-                    val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval)
-                        .build()
+                client.requestLocationUpdates(request, locationCallback, Looper.getMainLooper())
 
-
-                    val callback = object : LocationCallback() {
-                        override fun onLocationResult(result: LocationResult) {
-                            super.onLocationResult(result)
-
-                            result.locations.lastOrNull()?.let { location ->
-                                trySend(location.toLocationWithAttitude())
-                            }
-                        }
-                    }
-                    client.requestLocationUpdates(request, callback, Looper.getMainLooper())
-
-                    awaitClose {
-                        client.removeLocationUpdates(callback)
-                    }
+                awaitClose {
+                    client.removeLocationUpdates(locationCallback)
                 }
             }
         }
-
     }
 }

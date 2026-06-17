@@ -3,5 +3,6 @@
     <string name="majed">Majedul</string>
     <string name="analytics">Analytics</string>
     <string name="logout">Logout</string>
+    <string name="active_run">Active run</string>
 
 </resources>

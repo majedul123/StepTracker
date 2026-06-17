@@ -46,22 +46,18 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
-@OptIn(MapsComposeExperimentalApi::class)
 @Composable
 fun TrackerMap(
     isRunFinished: Boolean,
     currentLocation: Location?,
     locations: List<List<LocationWithTimeStamp>>,
-    onSnapShot: (Bitmap) -> Unit,
+    onSnapshot: (Bitmap) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     val context = LocalContext.current
     val mapStyle = remember {
         MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style)
     }
-
     val cameraPositionState = rememberCameraPositionState()
     val markerState = rememberMarkerState()
 
@@ -75,11 +71,9 @@ fun TrackerMap(
         animationSpec = tween(durationMillis = 500),
         label = ""
     )
-
     val markerPosition = remember(markerPositionLat, markerPositionLong) {
         LatLng(markerPositionLat.toDouble(), markerPositionLong.toDouble())
     }
-
 
     LaunchedEffect(markerPosition, isRunFinished) {
         if (!isRunFinished) {
@@ -88,11 +82,10 @@ fun TrackerMap(
     }
 
     LaunchedEffect(currentLocation, isRunFinished) {
-
         if (currentLocation != null && !isRunFinished) {
-            val latLong = LatLng(currentLocation.lat, currentLocation.long)
+            val latLng = LatLng(currentLocation.lat, currentLocation.long)
             cameraPositionState.animate(
-                update = CameraUpdateFactory.newLatLngZoom(latLong, 15f)
+                CameraUpdateFactory.newLatLngZoom(latLng, 17f)
             )
         }
     }
@@ -100,18 +93,17 @@ fun TrackerMap(
     var triggerCapture by remember {
         mutableStateOf(false)
     }
-
     var createSnapshotJob: Job? = remember {
         null
     }
-
 
     GoogleMap(
         cameraPositionState = cameraPositionState,
         properties = MapProperties(
             mapStyleOptions = mapStyle
-        ), uiSettings = MapUiSettings(
-            zoomControlsEnabled = true
+        ),
+        uiSettings = MapUiSettings(
+            zoomControlsEnabled = false
         ),
         modifier = if (isRunFinished) {
             modifier
@@ -123,44 +115,41 @@ fun TrackerMap(
                         triggerCapture = true
                     }
                 }
-        } else {
-            modifier
-        }
+        } else modifier
     ) {
         MajedPolyLines(locations = locations)
 
         MapEffect(locations, isRunFinished, triggerCapture, createSnapshotJob) { map ->
-
             if (isRunFinished && triggerCapture && createSnapshotJob == null) {
                 triggerCapture = false
 
                 val boundsBuilder = LatLngBounds.builder()
                 locations.flatten().forEach { location ->
-                    boundsBuilder.include(
-                        LatLng(
-                            location.location.location.lat, location.location.location.long
+                    boundsBuilder
+                        .include(
+                            LatLng(
+                                location.location.location.lat,
+                                location.location.location.long,
+                            )
                         )
-                    )
-
                 }
-
                 map.moveCamera(
                     CameraUpdateFactory.newLatLngBounds(
-                        boundsBuilder.build(), 100
+                        boundsBuilder.build(),
+                        100
                     )
                 )
 
                 map.setOnCameraIdleListener {
                     createSnapshotJob?.cancel()
                     createSnapshotJob = GlobalScope.launch {
-                        // make sure the map is sharp and focused
+                        // Make sure the map is sharp and focused before taking
+                        // the screenshot
                         delay(500L)
-                        map.awaitSnapshot()?.let {onSnapShot}
+                        map.awaitSnapshot()?.let(onSnapshot)
                     }
                 }
             }
-
-
         }
 
         if (!isRunFinished && currentLocation != null) {
@@ -168,7 +157,6 @@ fun TrackerMap(
                 currentLocation,
                 state = markerState
             ) {
-
                 Box(
                     modifier = Modifier
                         .size(35.dp)
@@ -176,12 +164,11 @@ fun TrackerMap(
                         .background(MaterialTheme.colorScheme.primary),
                     contentAlignment = Alignment.Center
                 ) {
-
                     Icon(
                         imageVector = RunIcon,
                         contentDescription = null,
-                        modifier = Modifier.size(20.dp),
-                        tint = MaterialTheme.colorScheme.onPrimary
+                        tint = MaterialTheme.colorScheme.onPrimary,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

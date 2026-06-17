@@ -139,10 +139,8 @@ class ActiveRunViewModel(
 
     private fun finishRun(mapPictureBytes: ByteArray) {
         val locations = state.runData.locations
-        if (locations.isEmpty() || locations.first().size <= 1) {
-            state = state.copy(
-                isSavingRun = false
-            )
+        if(locations.isEmpty() || locations.first().size <= 1) {
+            state = state.copy(isSavingRun = false)
             return
         }
 
@@ -150,16 +148,17 @@ class ActiveRunViewModel(
             val run = Run(
                 id = null,
                 duration = state.elapsedTime,
-                dateTimeUtc = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("UTC")),
+                dateTimeUtc = ZonedDateTime.now()
+                    .withZoneSameInstant(ZoneId.of("UTC")),
                 distanceMeters = state.runData.distanceMeters,
-                location = state.currentLocation?: Location(0.0, 0.0),
+                location = state.currentLocation ?: Location(0.0, 0.0),
                 maxSpeedKmh = LocationDataCalculator.getMaxSpeedKmh(locations),
                 totalElevationMeters = LocationDataCalculator.getTotalElevationMeters(locations),
                 mapPictureUrl = null
             )
 
             runningTracker.finishRun()
-            when (val result = runRepository.upsertRun(run, mapPictureBytes)) {
+            when(val result = runRepository.upsertRun(run, mapPictureBytes)) {
                 is Result.Error -> {
                     eventChannel.send(ActiveRunEvent.Error(result.error.asUiText()))
                 }

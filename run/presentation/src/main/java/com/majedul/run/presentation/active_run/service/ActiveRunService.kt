@@ -1,5 +1,6 @@
 package com.majedul.run.presentation.active_run.service
 
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,10 +13,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
-import com.majedul.core.presentation.designsystem.R
 import com.majedul.core.presentation.ui.formatted
 import com.majedul.run.domain.RunningTracker
-
+import com.majedul.run.presentation.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -24,7 +24,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import java.lang.IllegalArgumentException
-import kotlin.getValue
 
 class ActiveRunService: Service() {
 
@@ -34,7 +33,7 @@ class ActiveRunService: Service() {
 
     private val baseNotification by lazy {
         NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-            .setSmallIcon(R.drawable.logo)
+            .setSmallIcon(com.majedul.core.presentation.designsystem.R.drawable.logo)
             .setContentTitle(getString(R.string.active_run))
     }
 
