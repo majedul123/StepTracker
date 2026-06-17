@@ -5,15 +5,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.majedul.core.domain.SessionStorage
 import com.majedul.core.domain.run.RunRepository
 import com.majedul.core.domain.SyncRunSchedular
 import com.majedul.run.presentation.run_overview.mapper.toRunUI
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.minutes
 
-class RunOverViewViewModel(private val runRepository: RunRepository, private val runSchedular: SyncRunSchedular) : ViewModel() {
+class RunOverViewViewModel(
+    private val runRepository: RunRepository,
+    private val runSchedular: SyncRunSchedular,
+    private val applicationScope: CoroutineScope,
+    private val sessionStorage: SessionStorage
+) : ViewModel() {
 
     var state by mutableStateOf(RunOverviewState())
         private set
@@ -38,7 +45,7 @@ class RunOverViewViewModel(private val runRepository: RunRepository, private val
         when (action) {
             RunOverviewAction.OnAnalyticsClick -> Unit
 
-            RunOverviewAction.OnLogoutCLick -> Unit
+            RunOverviewAction.OnLogoutCLick -> logout()
 
             RunOverviewAction.OnStartClick -> Unit
             is RunOverviewAction.DeleteRun -> {
@@ -46,6 +53,17 @@ class RunOverViewViewModel(private val runRepository: RunRepository, private val
                     runRepository.deleteRun(action.runUi.id)
                 }
             }
+        }
+
+    }
+
+    private fun logout(){
+
+        applicationScope.launch {
+            runSchedular.cancelAllSyncs()
+            runRepository.deleteAllRuns()
+            runRepository.logout()
+            sessionStorage.set(null)
         }
 
     }

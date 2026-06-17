@@ -1,5 +1,6 @@
 package com.majedul.core.data.run
 
+import com.majedul.core.data.networking.get
 import com.majedul.core.database.RoomLocalRunDataSource
 import com.majedul.core.database.dao.RunPendingSyncDao
 import com.majedul.core.database.mappers.toRun
@@ -13,6 +14,11 @@ import com.majedul.core.domain.util.DataError
 import com.majedul.core.domain.util.EmptyResult
 import com.majedul.core.domain.util.Result
 import com.majedul.core.domain.util.asEmptyDataResult
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerAuthProvider
+import io.ktor.client.plugins.plugin
+import io.ktor.client.request.get
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -26,7 +32,8 @@ class OfflineFirstRunRepository(
     private val applicationScope: CoroutineScope,
     private val runPendingSyncDao: RunPendingSyncDao,
     private val sessionStorage: SessionStorage,
-    private val syncRunSchedular: SyncRunSchedular
+    private val syncRunSchedular: SyncRunSchedular,
+    private val client: HttpClient
 ) : RunRepository {
 
     override fun getRuns(): Flow<List<Run>> {
@@ -146,5 +153,22 @@ class OfflineFirstRunRepository(
             deleteJobs.forEach { it.join() }
         }
 
+    }
+
+
+    override suspend fun deleteAllRuns() {
+        localRunDataSource.deleteAllRuns()
+    }
+
+    override suspend fun logout(): EmptyResult<DataError.Network> {
+
+        val result = client.get<Unit>(
+            route = "/logout"
+        ).asEmptyDataResult()
+
+        client.plugin(Auth).providers.filterIsInstance<BearerAuthProvider>()
+            .firstOrNull()
+            ?.clearToken()
+        return result
     }
 }

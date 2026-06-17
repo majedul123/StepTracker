@@ -92,6 +92,13 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController){
             RunoverViewScreenRoot(
                 onStartClick = {
                     navController.navigate("active_run")
+                },
+                onLogoutClick = {
+                    navController.navigate("auth"){
+                        popUpTo("run"){
+                            inclusive = false
+                        }
+                    }
                 }
             )
         }
