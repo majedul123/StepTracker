@@ -26,6 +26,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+    dynamicFeatures += setOf(":analytics:analytics_feature")
 }
 
 dependencies {

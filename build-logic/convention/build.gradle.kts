@@ -47,5 +47,10 @@ gradlePlugin {
             id = "majedul.jvm.ktor"
             implementationClass = "JvmKtorConventionPlugin"
         }
+
+        register("androidDynamicFeature") {
+            id = "majedul.android.dynamic.feature"
+            implementationClass = "AndroidDynamicFeatureConventionPlugin"
+        }
     }
 }

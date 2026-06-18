@@ -125,6 +125,7 @@ majedul-android-feature-ui = { id = "majedul.android.feature.ui", version = "uns
 majedul-android-room = { id = "majedul.android.room", version = "unspecified" }
 majedul-jvm-library = { id = "majedul.jvm.library", version = "unspecified" }
 majedul-jvm-ktor = { id = "majedul.jvm.ktor", version = "unspecified" }
+majedul-dynamic-feature = { id = "majedul.android.dynamic.feature", version = "unspecified" }
 
 [bundles]
 compose = [
