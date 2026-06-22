@@ -52,6 +52,7 @@ internal fun Project.configureBuildTypes(
                             configureDebugBuildType(apiKey)
                         }
                         release {
+                            isMinifyEnabled = false
                             configureReleaseBuildType(commonExtension, apiKey)
                         }
                     }
