@@ -20,13 +20,14 @@ import com.majedul.run.presentation.run_overview.RunoverViewScreenRoot
 fun NavigationRoot(
     navController: NavHostController,
     isLoggedIn: Boolean,
+    onAnalyticsClick: () -> Unit
 ) {
     NavHost(
         navController = navController,
         startDestination = if (isLoggedIn) "run" else "auth"
     ) {
         authGraph(navController)
-        runGraph(navController)
+        runGraph(navController, onAnalyticsClick)
     }
 }
 
@@ -85,7 +86,10 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     }
 }
 
-private fun NavGraphBuilder.runGraph(navController: NavHostController){
+private fun NavGraphBuilder.runGraph(
+    navController: NavHostController,
+    onAnalyticsClick: () -> Unit,
+){
 
     navigation(startDestination = "run_overview", route = "run") {
         composable(route = "run_overview") {
@@ -99,7 +103,8 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController){
                             inclusive = false
                         }
                     }
-                }
+                },
+                onAnalyticsClick = onAnalyticsClick
             )
         }
 

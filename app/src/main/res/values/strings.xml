@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">majedul</string>
     <string name="title_analytics_feature">Analytics</string>
+    <string name="could_not_load_module">Could not load module</string>
+    <string name="install_failed">Unfortunately , the installation failed. Please try again later.</string>
+    <string name="analytics_installed">The analytics feature was installed. Fell free to use it now.</string>
+    <string name="installing_module">Installing Module</string>
 </resources>

@@ -38,7 +38,8 @@ import org.koin.androidx.compose.koinViewModel
 fun RunoverViewScreenRoot(
     viewModel: RunOverViewViewModel = koinViewModel(),
     onStartClick: () -> Unit,
-    onLogoutClick: () -> Unit
+    onLogoutClick: () -> Unit,
+    onAnalyticsClick: () -> Unit
 ) {
     RunOverviewScreen(
         state = viewModel.state,
@@ -46,6 +47,7 @@ fun RunoverViewScreenRoot(
             when (action) {
                 is RunOverviewAction.OnStartClick -> onStartClick()
                 is RunOverviewAction.OnLogoutCLick -> onLogoutClick()
+                is RunOverviewAction.OnAnalyticsClick -> onAnalyticsClick()
                 else -> Unit
             }
             viewModel.onAction(action)

@@ -1,6 +1,8 @@
 package com.majedul.steptracker
 
 import android.app.Application
+import android.content.Context
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.majedul.auth.data.di.authDataModule
 import com.majedul.auth.presentation.di.authViewModelModule
 import com.majedul.core.data.di.coreDataModule
@@ -46,5 +48,10 @@ class MajedApplication : Application() {
                 runDataModule
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }
